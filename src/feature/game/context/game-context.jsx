@@ -14,9 +14,17 @@ function readStoredValue(key) {
 
 export const GameContextProvider = ({ children }) => {
   const [player, setPlayer] = useState(() => readStoredValue('player'));
-  const [spectator, setSpectator] = useState(() =>
+  const [spectator, setSpectatorData] = useState(() =>
     readStoredValue('spectator')
   );
+
+  function setSpectator(value) {
+    setSpectatorData(() => {
+      return Object.assign({}, spectator, {
+        [value?.game_id]: value,
+      });
+    });
+  }
 
   function logout() {
     setPlayer(null);
