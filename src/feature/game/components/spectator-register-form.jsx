@@ -1,26 +1,8 @@
-/**
- * @import { z } from "zod";
- * @import { UseFormReturn } from "react-hook-form";
- * @import {
- *    spectatorRegisterSchema,
- * } from "@feature/game/dto";
- */
-import { Controller, useForm } from 'react-hook-form';
-import { registerPlayer, registerSpectator } from '../api';
 import { cn } from '@core/helpers';
+import { Controller, useForm } from 'react-hook-form';
+import { registerSpectator } from '../api';
 
-/**
- * @param {{
- *    gameId: string;
- * }} props
- * @returns
- */
 export function SpectatorRegisterForm({ gameId }) {
-  /**
-   * @type {UseFormReturn<
-   *    z.infer<typeof spectatorRegisterSchema>
-   * >}
-   */
   const form = useForm({
     defaultValues: {
       spectator_avatar: 'https://example.com/avatar.png',
@@ -30,9 +12,6 @@ export function SpectatorRegisterForm({ gameId }) {
   const { formState } = form;
   const { isSubmitting, errors } = formState;
 
-  /**
-   * @param {z.infer<typeof spectatorRegisterSchema>} dto
-   */
   async function handleSubmit(dto) {
     try {
       const response = await registerSpectator(gameId, {

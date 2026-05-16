@@ -1,10 +1,3 @@
-/**
- * @import { z } from "zod";
- * @import { UseFormReturn } from "react-hook-form";
- * @import {
- *    playerRegisterSchema,
- * } from "@feature/game/dto";
- */
 import { Controller, useForm } from 'react-hook-form';
 import { registerPlayer } from '../api';
 import { cn } from '@core/helpers';
@@ -14,11 +7,6 @@ import { useEffect } from 'react';
 export function PlayerRegisterForm() {
   const { player, setPlayer } = useGameContext();
 
-  /**
-   * @type {UseFormReturn<
-   *    z.infer<typeof playerRegisterSchema>
-   * >}
-   */
   const form = useForm({
     defaultValues: {
       ai_player_name: player?.ai_player_name || 'Meu Jogador',
@@ -34,9 +22,6 @@ export function PlayerRegisterForm() {
   const { formState } = form;
   const { isSubmitting, errors } = formState;
 
-  /**
-   * @param {z.infer<typeof playerRegisterSchema>} dto
-   */
   async function handleSubmit(dto) {
     try {
       const response = await registerPlayer({

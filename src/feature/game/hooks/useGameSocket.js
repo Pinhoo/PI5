@@ -1,56 +1,14 @@
-/**
- * @import { z } from "zod";
- * @import {
- *    gameStreamDtoSchema
- * } from "@feature/game/models";
- */
 import { API_BASE_URL } from '@core/constants';
 import { resolveWebSocketURL } from '@core/helpers';
 import { useEffect, useRef, useState } from 'react';
 
-/**
- * @param {string} gameId
- * @param {string} token
- * @returns {{
- *    connected: boolean,
- *    gameState: z.infer<typeof gameStreamDtoSchema> | null
- * }}
- */
 export function useGameSocket(gameId, token) {
-  /**
-   * @type {[
-   *   connected: boolean,
-   *   setConnected: React.Dispatch<React.SetStateAction<boolean>>,
-   * ]}
-   */
   const [connected, setConnected] = useState(false);
-
-  /**
-   * @type {[
-   *   currentGameState: z.infer<typeof gameStreamDtoSchema> | null,
-   *   setCurrentGameState: React.Dispatch<
-   *     React.SetStateAction<z.infer<typeof gameStreamDtoSchema> | null>
-   *   >,
-   * ]}
-   */
   const [currentGameState, setCurrentGameState] = useState(null);
-
-  /**
-   * @type {[
-   *   connected: boolean,
-   *   setConnected: React.Dispatch<React.SetStateAction<boolean>>,
-   * ]}
-   */
   const [mounted, setMounted] = useState(false);
 
-  /**
-   * @type {React.RefObject<NodeJS.Timeout | null>}
-   */
   const reconnectTimeout = useRef(null);
 
-  /**
-   * @type {React.RefObject<WebSocket | null>}
-   */
   const webSocketRef = useRef(null);
 
   useEffect(() => {

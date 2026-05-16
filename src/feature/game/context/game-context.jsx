@@ -1,36 +1,8 @@
-/**
- * @import { z } from "zod";
- * @import {
- *    teamPlayerResponseSchema,
- *    spectatorCreateResponseSchema
- * } from "@feature/game/models";
- */
 import { setAccessToken } from '@core/helpers/fetch';
 import { createContext, useContext, useEffect, useState } from 'react';
 
-/**
- * @type {React.Context<{
- *   player: z.infer<typeof teamPlayerResponseSchema> | null,
- *   setPlayer: React.Dispatch<React.SetStateAction<
- *     z.infer<typeof teamPlayerResponseSchema> | null
- *   >>,
- *   spectator: z.infer<typeof spectatorCreateResponseSchema> | null,
- *   setSpectator: React.Dispatch<React.SetStateAction<
- *     z.infer<typeof spectatorCreateResponseSchema> | null
- *   >>,
- *   logout: () => void
- * }>}
- */
 const context = createContext({});
 
-/**
- * Função auxiliar para ler um valor armazenado no localStorage, garantindo que
- * a leitura só ocorra em ambiente de navegador e que o valor seja parseado de
- * forma segura, retornando null caso o valor não exista ou seja inválido.
- *
- * @param {string} key
- * @returns {T extends any}
- */
 function readStoredValue(key) {
   if (typeof window === 'undefined') {
     return null;
@@ -41,24 +13,7 @@ function readStoredValue(key) {
 }
 
 export const GameContextProvider = ({ children }) => {
-  /**
-   * @type {[
-   *    player: z.infer<typeof teamPlayerSchema> | null,
-   *    setPlayer: React.Dispatch<React.SetStateAction<
-   *      z.infer<typeof teamPlayerSchema> | null
-   *    >>
-   * ]}
-   */
   const [player, setPlayer] = useState(() => readStoredValue('player'));
-
-  /**
-   * @type {[
-   *    spectator: z.infer<typeof spectatorCreateResponseSchema> | null,
-   *    setSpectator: React.Dispatch<React.SetStateAction<
-   *      z.infer<typeof spectatorCreateResponseSchema> | null
-   *    >>
-   * ]}
-   */
   const [spectator, setSpectator] = useState(() =>
     readStoredValue('spectator')
   );

@@ -1,24 +1,12 @@
-/**
- * @import { z } from "zod";
- * @import { UseFormReturn } from "react-hook-form";
- * @import {
- *    playerEndpointUpdateSchema,
- * } from "@feature/game/dto";
- */
-import { Controller, useForm } from 'react-hook-form';
-import { registerPlayer, updatePlayerMoveEndpoint } from '../api';
 import { cn } from '@core/helpers';
-import { useGameContext } from '../context/game-context';
 import { useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { updatePlayerMoveEndpoint } from '../api';
+import { useGameContext } from '../context/game-context';
 
 export function PlayerUpdateForm() {
   const { player, setPlayer } = useGameContext();
 
-  /**
-   * @type {UseFormReturn<
-   *    z.infer<typeof playerEndpointUpdateSchema>
-   * >}
-   */
   const form = useForm({
     defaultValues: {
       ai_player_move_endpoint:
@@ -28,9 +16,6 @@ export function PlayerUpdateForm() {
   const { formState } = form;
   const { isSubmitting, errors } = formState;
 
-  /**
-   * @param {z.infer<typeof playerEndpointUpdateSchema>} dto
-   */
   async function handleSubmit(dto) {
     try {
       const response = await updatePlayerMoveEndpoint(player?.id, {
