@@ -1,7 +1,7 @@
 /**
  * @import { z } from "zod";
  * @import {
- *    teamPlayerSchema,
+ *    teamPlayerResponseSchema,
  *    spectatorCreateResponseSchema
  * } from "@feature/game/models";
  */
@@ -10,9 +10,9 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 /**
  * @type {React.Context<{
- *   player: z.infer<typeof teamPlayerSchema> | null,
+ *   player: z.infer<typeof teamPlayerResponseSchema> | null,
  *   setPlayer: React.Dispatch<React.SetStateAction<
- *     z.infer<typeof teamPlayerSchema> | null
+ *     z.infer<typeof teamPlayerResponseSchema> | null
  *   >>,
  *   spectator: z.infer<typeof spectatorCreateResponseSchema> | null,
  *   setSpectator: React.Dispatch<React.SetStateAction<
