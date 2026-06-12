@@ -1,12 +1,14 @@
 import { cn } from '@core/helpers';
 import { Controller, useForm } from 'react-hook-form';
 import { registerSpectator } from '../api';
+import { useGameContext } from '../context/game-context';
 
 export function SpectatorRegisterForm({ gameId }) {
+  const { setSpectator } = useGameContext();
   const form = useForm({
     defaultValues: {
-      spectator_avatar: 'https://example.com/avatar.png',
-      spectator_name: 'Meu Espectador',
+      spectator_avatar: 'https://www.gamevicio.com/wp-content/uploads/2025/07/Captura-de-tela-2025-07-09-092823-1068x600.png',
+      spectator_name: 'Gulosos Spectator',
     },
   });
   const { formState } = form;
@@ -18,9 +20,12 @@ export function SpectatorRegisterForm({ gameId }) {
         ...dto,
       });
 
-      if (!response?.player_access_token) {
+      if (!response?.spectator_access_token) {
         throw new Error('[ERR]: resposta inesperada ao registrar espectador');
       }
+
+      setSpectator(response);
+
     } catch (err) {
       console.error(err?.message || '[ERR]: erro ao registrar espectador', err);
     }

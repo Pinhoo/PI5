@@ -22,7 +22,7 @@ export function useGameSocket(gameId, token) {
       const ws = new WebSocket(socketUrl);
       webSocketRef.current = ws;
 
-      ws.onopen = () => {
+      ws.onopen = (event) => {
         setConnected(true);
       };
 

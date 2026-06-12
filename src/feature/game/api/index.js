@@ -33,6 +33,12 @@ export function getGame(gameId) {
   });
 }
 
+export function getGameHistory(gameId) {
+  return apiClient(`/games/${gameId}/turns`, {
+    method: 'GET',
+  });
+}
+
 export function createGame(dto) {
   return apiClient('/games', {
     method: 'POST',

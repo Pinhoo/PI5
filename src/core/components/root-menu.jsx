@@ -27,20 +27,6 @@ export function RootMenu() {
             Home
           </Link>
           <Link
-            to={'/about'}
-            className={cn(
-              'text-lg',
-              'p-2 px-4',
-              'hover:bg-neutral-700',
-              'transition-all',
-              {
-                'bg-neutral-700': resolvedPath.pathname.startsWith('/about'),
-              }
-            )}
-          >
-            Sobre
-          </Link>
-          <Link
             to={'/player'}
             className={cn(
               'text-lg',
